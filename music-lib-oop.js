@@ -1,22 +1,23 @@
+//Library Creation
 function Library (name, creator) {
   this.name = name;
   this.creator = creator;
   this.playlists = [];
 }
 
+//Playlist creation
+function Playlist (name) {
+  this.name = name;
+  this.tracks = [];
+}
 
-Library.prototype.addPlaylist = function (name) {
-
-  let playlist = {
-    name: name,
-    tracks: []
-
-  };
+//Adding playlist to a library
+Library.prototype.addPlaylist = function (playlist) {
   this.playlists.push(playlist);
 }
 
-
-Library.prototype.addTrackToPlaylist = function (playlistName, title, rating, length) {
+//Adding track to a playlist
+Playlist.prototype.addTrack = function (title, rating, length) {
   if (typeof rating !== 'number' || rating > 5 || rating < 1) {
     console.log('Please input a valid rating');
     return;
@@ -28,23 +29,12 @@ Library.prototype.addTrackToPlaylist = function (playlistName, title, rating, le
     length: length
   };
 
-  for (let playlist of this.playlists) {
-    if (playlist.name === playlistName) {
-      playlist.tracks.push(track);
-    } else {
-      console.log('Playlist does not exist');
-      return;
-    }
-  }
+  this.playlist.push(track);
 }
+
+const myPlaylist = new Playlist('myPlaylist');
 
 const lib = new Library('theLib', 'me');
 
+console.log(myPlaylist);
 
-lib.addPlaylist('thePlaylist');
-
-lib.addTrackToPlaylist('thePlaylist', 'Magic', 5, 1234);
-lib.addTrackToPlaylist('thePlaylist', 'Gold', 4, 4321);
-
-
-console.log(lib.playlists[0].tracks[0]);
