@@ -16,6 +16,22 @@ function Playlist (name) {
   this.addTrack = function (track) {
     this.tracks.push(track);
   }
+
+  this.overallRating = function () {
+    result = 0;
+    for (let track of this.tracks) {
+      result += track.rating;
+    }
+    return result;
+  }
+
+  this.totalDuration = function () {
+    result = 0;
+    for (let track of this.tracks) {
+      result += track.length;
+    }
+    return result;
+  }
 }
 
 //Track creation
@@ -41,6 +57,3 @@ lib.addPlaylist(maPlaylist);
 lib.addPlaylist(daPlaylist);
 daPlaylist.addTrack(daTrack);
 maPlaylist.addTrack(maTrack);
-
-
-console.log(lib.playlists[0].tracks[0]);
