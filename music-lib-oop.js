@@ -1,40 +1,46 @@
 //Library Creation
 function Library (name, creator) {
   this.name = name;
-  this.creator = creator;
   this.playlists = [];
+
+  this.addPlaylist = function (playlist) {
+    this.playlists.push(playlist);
+  }
 }
 
 //Playlist creation
 function Playlist (name) {
   this.name = name;
   this.tracks = [];
+
+  this.addTrack = function (track) {
+    this.tracks.push(track);
+  }
 }
 
-//Adding playlist to a library
-Library.prototype.addPlaylist = function (playlist) {
-  this.playlists.push(playlist);
-}
-
-//Adding track to a playlist
-Playlist.prototype.addTrack = function (title, rating, length) {
-  if (typeof rating !== 'number' || rating > 5 || rating < 1) {
-    console.log('Please input a valid rating');
+//Track creation
+function Track (title, rating, length) {
+  if (!Number.isInteger(rating) || rating > 5 || rating < 1) {
+    console.log('Please input a valid rating')
     return;
   }
-
-  let track = {
-    title: title,
-    rating: rating,
-    length: length
-  };
-
-  this.playlist.push(track);
+  this.title = title;
+  this.rating = rating;
+  this.length = length;
 }
 
-const myPlaylist = new Playlist('myPlaylist');
+const lib = new Library ('lib', 'me');
 
-const lib = new Library('theLib', 'me');
+const daPlaylist = new Playlist ('daPlaylist')
+const maPlaylist = new Playlist ('maPlaylist');
 
-console.log(myPlaylist);
+const daTrack = new Track ('daTrack', 4, 2345);
+const maTrack = new Track ('maTrack', 3, 9876);
 
+lib.addPlaylist(maPlaylist);
+lib.addPlaylist(daPlaylist);
+daPlaylist.addTrack(daTrack);
+maPlaylist.addTrack(maTrack);
+
+
+console.log(lib.playlists[0].tracks[0]);
